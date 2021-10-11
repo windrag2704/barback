@@ -8,9 +8,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/tables")
 public class TableController {
+
+    private TableService service;
+
+    @Autowired
+    public TableController(
+            final TableService service
+    ) {
+        this.service = service;
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getTables")
     public List<BarTable> getTables() {
