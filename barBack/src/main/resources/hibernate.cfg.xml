@@ -17,11 +17,11 @@
         </property>
 
         <property name = "hibernate.connection.username">
-            root <!-- хз -->
+            postgres <!-- хз -->
         </property>
 
         <property name = "hibernate.connection.password">
-            root123 <!-- хз -->
+            1234 <!-- хз -->
         </property>
     </session-factory>
 </hibernate-configuration>
