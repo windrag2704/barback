@@ -1,4 +1,4 @@
-package com.example.barBack.entity;
+package com.example.barBack.model;
 
 import javax.persistence.*;
 
@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table (name = "bar_table")
 public class BarTable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "number")
     private int number;
@@ -16,16 +16,16 @@ public class BarTable {
     private int seatCnt;
 
     @Column(name = "location")
-    private TableLocation location;
+    private String location;
 
     @Column(name = "photo")
     private String photo;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -45,11 +45,11 @@ public class BarTable {
         this.seatCnt = seatCnt;
     }
 
-    public TableLocation getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(TableLocation location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 

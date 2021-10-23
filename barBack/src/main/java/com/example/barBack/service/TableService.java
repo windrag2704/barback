@@ -1,6 +1,6 @@
 package com.example.barBack.service;
 
-import com.example.barBack.entity.BarTable;
+import com.example.barBack.model.BarTable;
 
 import java.util.List;
 

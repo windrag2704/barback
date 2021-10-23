@@ -1,7 +1,7 @@
 package com.example.barBack.service.impl;
 
-import com.example.barBack.entity.BarTable;
-import com.example.barBack.entity.TableLocation;
+import com.example.barBack.model.BarTable;
+import com.example.barBack.model.TableLocation;
 import com.example.barBack.repository.TableRepository;
 import com.example.barBack.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +23,15 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public List<BarTable> getTables() {
+
         List<BarTable> tables = new ArrayList<>();
         BarTable table = new BarTable();
-        table.setId(1);
-        table.setLocation(TableLocation.BAT_TABLE);
+        table.setLocation(TableLocation.BAT_TABLE.getName());
         table.setNumber(1);
         table.setPhoto("123.jpg");
         table.setSeatCnt(4);
         tables.add(table);
-        return tables;
-        // return repository.findAll();
+        repository.save(table);
+        return repository.findAll();
     }
 }

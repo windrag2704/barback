@@ -1,4 +1,4 @@
-package com.example.barBack.entity;
+package com.example.barBack.model;
 
 public enum TableLocation {
     BAR_COUNTER("bar_counter"),
