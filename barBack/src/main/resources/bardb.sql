@@ -92,8 +92,8 @@ create table if not exists product
 		constraint product_pk
 			primary key,
 	name varchar(255) not null,
-	photo bytea,
-	price integer not null,
+	-- photo bytea,
+	price double precision not null,
 	alcohol double precision not null,
 	volume double precision,
 	type_id integer not null
