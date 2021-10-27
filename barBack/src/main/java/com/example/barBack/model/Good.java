@@ -24,8 +24,8 @@ public class Good {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne (fetch=FetchType.LAZY)
-    @JoinColumn (name="id")
+    @ManyToOne (fetch=FetchType.LAZY, optional = false)
+    @JoinColumn (name="alcohol_type_id")
     private AlcoholType alcoholType;
 
     public Long getId() {
