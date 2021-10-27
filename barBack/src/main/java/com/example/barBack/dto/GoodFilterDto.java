@@ -1,6 +1,6 @@
 package com.example.barBack.dto;
 
-public class GoodsFilterDto {
+public class GoodFilterDto {
     private String name;
     private String category;
 

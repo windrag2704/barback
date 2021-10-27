@@ -1,32 +1,13 @@
-package com.example.barBack.model;
+package com.example.barBack.dto;
 
-import javax.persistence.*;
-
-@Entity
-@Table (name = "product")
-public class Good {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class GoodDto {
     private Long id;
-
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "price")
     private double price;
-
-    @Column(name = "alcohol")
     private double alcohol;
-
-    @Column(name = "volume")
     private double volume;
-
-    @Column(name = "description")
     private String description;
-
-    @ManyToOne (fetch=FetchType.LAZY, optional = false)
-    @JoinColumn (name="type_id")
-    private AlcoholType alcoholType;
+    private String alcoholType;
 
     public Long getId() {
         return id;
@@ -76,11 +57,11 @@ public class Good {
         this.description = description;
     }
 
-    public AlcoholType getAlcoholType() {
+    public String getAlcoholType() {
         return alcoholType;
     }
 
-    public void setAlcoholType(AlcoholType alcoholType) {
+    public void setAlcoholType(String alcoholType) {
         this.alcoholType = alcoholType;
     }
 }
