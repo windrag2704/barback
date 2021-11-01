@@ -8,7 +8,42 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface GoodsRepository extends JpaRepository<Good, Long> {
-    // не работает
-//    @Query("select p from product p where p.name = :name")
-//    public List<Good> findGoodsByName(@Param("name") String name);
+    @Query("select g from Good g where g.name = :name")
+    public List<Good> findGoodsByName(@Param("name") String name);
+
+    @Query("select g from Good g "
+            + "where g.name = :name "
+            + "and g.price >= :priceFrom "
+            + "and g.price <= :priceTo "
+            + "and g.alcohol >= :alcoholFrom "
+            + "and g.alcohol <= :alcoholTo "
+            + "and g.volume >= :volumeFrom "
+            + "and g.volume <= :volumeTo")
+    public List<Good> findGoodsByCategory(
+            @Param("name") String name,
+            @Param("priceFrom") double priceFrom,
+            @Param("priceTo") double priceTo,
+            @Param("alcoholFrom") double alcoholFrom,
+            @Param("alcoholTo") double alcoholTo,
+            @Param("volumeFrom") double volumeFrom,
+            @Param("volumeTo") double volumeTo
+    );
+
+    @Query("select g from Good g "
+            + "where g.price >= :priceFrom "
+            + "and g.price <= :priceTo "
+            + "and g.alcohol >= :alcoholFrom "
+            + "and g.alcohol <= :alcoholTo "
+            + "and g.volume >= :volumeFrom "
+            + "and g.volume <= :volumeTo")
+    public List<Good> findGoodsByCategoryWithoutName(
+            @Param("priceFrom") double priceFrom,
+            @Param("priceTo") double priceTo,
+            @Param("alcoholFrom") double alcoholFrom,
+            @Param("alcoholTo") double alcoholTo,
+            @Param("volumeFrom") double volumeFrom,
+            @Param("volumeTo") double volumeTo
+    );
+
+    // методы для поиска без категории и без имени и без категории
 }

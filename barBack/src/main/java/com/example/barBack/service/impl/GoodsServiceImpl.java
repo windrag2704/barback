@@ -9,8 +9,8 @@ import com.example.barBack.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -18,19 +18,64 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsRepository repository;
 
     @Override
-    public List<Good> getGoodsByCategory(GoodFilterDto goodFilterDto) {
-        return null;
+    public List<GoodDto> getGoodsByCategory(GoodFilterDto goodFilterDto) {
+        // обработка параметров, задать дефолтные значения
+        filterValidator(goodFilterDto);
+        List<Good> goods;
+
+        if (goodFilterDto.getName().equals("")) {
+            goods = repository.findGoodsByCategoryWithoutName(
+                    goodFilterDto.getPriceFrom(),
+                    goodFilterDto.getPriceTo(),
+                    goodFilterDto.getAlcoholFrom(),
+                    goodFilterDto.getAlcoholTo(),
+                    goodFilterDto.getVolumeFrom(),
+                    goodFilterDto.getVolumeTo()
+            );
+        } else {
+            goods = repository.findGoodsByCategory(
+                    goodFilterDto.getName(),
+                    goodFilterDto.getPriceFrom(),
+                    goodFilterDto.getPriceTo(),
+                    goodFilterDto.getAlcoholFrom(),
+                    goodFilterDto.getAlcoholTo(),
+                    goodFilterDto.getVolumeFrom(),
+                    goodFilterDto.getVolumeTo()
+            );
+        }
+        return goods.stream()
+                .map(GoodConverter::convertFromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    private void filterValidator(final GoodFilterDto goodFilterDto) {
+        if (goodFilterDto.getScoreTo() == 0.0) {
+            goodFilterDto.setScoreTo(5.0);
+        }
+        if (goodFilterDto.getPriceTo() == 0.0) {
+            goodFilterDto.setPriceTo(1000000);
+        }
+        if (goodFilterDto.getAlcoholTo() == 0.0) {
+            goodFilterDto.setAlcoholTo(100.0);
+        }
+        if (goodFilterDto.getVolumeTo() == 0.0) {
+            goodFilterDto.setVolumeTo(100);
+        }
+    }
+
+    @Override
+    public List<GoodDto> getGoods() {
+        final List<Good> goods = repository.findAll();
+        return goods.stream()
+                .map(GoodConverter::convertFromEntityToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<GoodDto> getGoodsByName(String name) {
-        final List<Good> goods = repository.findAll();
-        List<GoodDto> goodsDto = new ArrayList<>();
-        // переделать в стрим
-        for(Good good : goods) {
-            goodsDto.add(GoodConverter.convertFromEntityToDto(good));
-        }
-        return goodsDto;
-        //return repository.findGoodsByName(name);
+        final List<Good> goods = repository.findGoodsByName(name);
+        return goods.stream()
+                .map(GoodConverter::convertFromEntityToDto)
+                .collect(Collectors.toList());
     }
 }

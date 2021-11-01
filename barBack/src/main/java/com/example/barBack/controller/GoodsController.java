@@ -2,7 +2,6 @@ package com.example.barBack.controller;
 
 import com.example.barBack.dto.GoodDto;
 import com.example.barBack.dto.GoodFilterDto;
-import com.example.barBack.model.Good;
 import com.example.barBack.service.GoodsService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,13 +24,19 @@ public class GoodsController {
             produces = "application/json")
     public String getGoodsByCategory(@RequestBody String body) {
         final GoodFilterDto goodFilterDto = gson.fromJson(body, GoodFilterDto.class);
-        final List<Good> goods = service.getGoodsByCategory(goodFilterDto);
+        final List<GoodDto> goods = service.getGoodsByCategory(goodFilterDto);
+        return gson.toJson(goods);
+    }
+
+    @GetMapping(value = "/getGoods", produces = "application/json")
+    public String getGoods() {
+        List<GoodDto> goods = service.getGoods();
         return gson.toJson(goods);
     }
 
     @GetMapping(value = "/getGoodsByName", produces = "application/json")
     public String getGoodsByName(@RequestParam("name") String name) {
-        List<GoodDto> goods = service.getGoodsByName("name");
+        List<GoodDto> goods = service.getGoodsByName(name);
         return gson.toJson(goods);
     }
 }
