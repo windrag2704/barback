@@ -21,7 +21,7 @@ create table if not exists customer
             primary key,
     phone varchar(50) not null,
     name  varchar(255),
-    blocked boolean
+    blocked boolean default false
 );
 
 create table if not exists table_reservation
@@ -104,11 +104,15 @@ create table if not exists alco_reservation
     finished    boolean default false not null
 );
 
-create table if not exists user_has_favorite
+create table if not exists customer_has_favorite
 (
-    user_id integer,
-    product_id integer,
+    customer_id integer not null
+        constraint customer_favorite_fk
+            references customer,
+    product_id integer not null
+        constraint product_favorite_fk
+            references product,
     constraint favorite_pk
-        primary key (user_id, product_id)
+        primary key (customer_id, product_id)
 )
 
