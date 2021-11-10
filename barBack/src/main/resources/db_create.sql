@@ -104,15 +104,15 @@ create table if not exists alco_reservation
     finished    boolean default false not null
 );
 
-create table if not exists customer_has_favorite
+create table if not exists customer_has_favourite
 (
     customer_id integer not null
-        constraint customer_favorite_fk
+        constraint customer_favourite_fk
             references customer,
     product_id integer not null
-        constraint product_favorite_fk
+        constraint product_favourite_fk
             references product,
-    constraint favorite_pk
+    constraint favourite_pk
         primary key (customer_id, product_id)
 )
 
