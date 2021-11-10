@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface GoodsRepository extends JpaRepository<Good, Long> {
     @Query("select g from Good g where g.name = :name")
-    public List<Good> findGoodsByName(@Param("name") String name);
+    List<Good> findGoodsByName(@Param("name") String name);
 
     @Query("select g from Good g "
             + "where g.name = :name "
@@ -19,7 +19,7 @@ public interface GoodsRepository extends JpaRepository<Good, Long> {
             + "and g.alcohol <= :alcoholTo "
             + "and g.volume >= :volumeFrom "
             + "and g.volume <= :volumeTo")
-    public List<Good> findGoodsByCategory(
+    List<Good> findGoodsByCategory(
             @Param("name") String name,
             @Param("priceFrom") double priceFrom,
             @Param("priceTo") double priceTo,
@@ -36,7 +36,7 @@ public interface GoodsRepository extends JpaRepository<Good, Long> {
             + "and g.alcohol <= :alcoholTo "
             + "and g.volume >= :volumeFrom "
             + "and g.volume <= :volumeTo")
-    public List<Good> findGoodsByCategoryWithoutName(
+    List<Good> findGoodsByCategoryWithoutName(
             @Param("priceFrom") double priceFrom,
             @Param("priceTo") double priceTo,
             @Param("alcoholFrom") double alcoholFrom,
@@ -46,4 +46,6 @@ public interface GoodsRepository extends JpaRepository<Good, Long> {
     );
 
     // методы для поиска без категории и без имени и без категории
+
+    Good getGoodById(Long id);
 }

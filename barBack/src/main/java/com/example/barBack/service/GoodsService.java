@@ -8,9 +8,11 @@ import java.util.List;
 
 public interface GoodsService {
 
-    public List<GoodDto> getGoodsByCategory(GoodFilterDto goodFilterDto);
+    List<GoodDto> getGoodsByCategory(GoodFilterDto goodFilterDto);
 
-    public List<GoodDto> getGoods();
+    List<GoodDto> getGoods();
 
-    public List<GoodDto> getGoodsByName(String name);
+    List<GoodDto> getGoodsByName(String name);
+
+    GoodDto getGoodById(Long id);
 }
