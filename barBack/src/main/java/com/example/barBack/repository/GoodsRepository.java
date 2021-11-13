@@ -8,11 +8,11 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface GoodsRepository extends JpaRepository<Good, Long> {
-    @Query("select g from Good g where g.name = :name")
+    @Query("select g from Good g where g.name like concat('%', :name, '%')")
     public List<Good> findGoodsByName(@Param("name") String name);
 
     @Query("select g from Good g "
-            + "where g.name = :name "
+            + "where g.name like concat('%', :name, '%') "
             + "and g.price >= :priceFrom "
             + "and g.price <= :priceTo "
             + "and g.alcohol >= :alcoholFrom "

@@ -61,17 +61,17 @@ comment on column reservation.reservation_end is 'Дата и время око�
 create table if not exists score
 (
 	customer_id integer not null,
-	product_id integer not null,
+	good_id integer not null,
 	grade integer not null
 		constraint score_border
 			check ((grade >= 0) AND (grade <= 5)),
 	constraint score_pk
-		primary key (customer_id, product_id)
+		primary key (customer_id, good_id)
 );
 
 comment on table score is 'Таблица оценок алкоголя пользователями';
 comment on column score.customer_id is 'Уникальный идентификатор клиента';
-comment on column score.product_id is 'Уникальный идентификатор товара';
+comment on column score.good_id is 'Уникальный идентификатор товара';
 comment on column score.grade is 'Оценка товара';
 
 create table if not exists alcohol_type
@@ -86,10 +86,10 @@ comment on table alcohol_type is 'Таблица типов алкоголя (п
 comment on column alcohol_type.id is 'Уникальный идентификатор типа алкоголя';
 comment on column alcohol_type.name is 'Название типа алкоголя';
 
-create table if not exists product
+create table if not exists good
 (
 	id serial
-		constraint product_pk
+		constraint good_pk
 			primary key,
 	name varchar(255) not null,
 	-- photo bytea,
@@ -97,16 +97,16 @@ create table if not exists product
 	alcohol double precision not null,
 	volume double precision,
 	type_id integer not null
-		constraint product_alcohol_type_id_fk
+		constraint good_alcohol_type_id_fk
 			references alcohol_type,
 	description varchar(255)
 );
 
-comment on table product is 'Таблица ассортимента алкоголя бара';
-comment on column product.id is 'Уникальный идентификатор товара';
-comment on column product.photo is 'Фотография товара';
-comment on column product.price is 'Цена';
-comment on column product.alcohol is 'Крепость напитка';
-comment on column product.volume is 'Объем напитка';
-comment on column product.type_id is 'Ид типа алкоголя';
-comment on column product.description is 'Описание напитка';
+comment on table good is 'Таблица ассортимента алкоголя бара';
+comment on column good.id is 'Уникальный идентификатор товара';
+comment on column good.photo is 'Фотография товара';
+comment on column good.price is 'Цена';
+comment on column good.alcohol is 'Крепость напитка';
+comment on column good.volume is 'Объем напитка';
+comment on column good.type_id is 'Ид типа алкоголя';
+comment on column good.description is 'Описание напитка';
