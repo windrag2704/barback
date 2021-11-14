@@ -1,5 +1,6 @@
 package com.example.barBack.service;
 
+import com.example.barBack.dto.ReserveTableDto;
 import com.example.barBack.model.BarTable;
 
 import java.sql.Timestamp;
@@ -10,5 +11,5 @@ public interface TableService {
 
     List<BarTable> getAllByDate(Timestamp startDate, Timestamp endDate);
 
-    boolean reserveTable(int number);
+    boolean reserveTable(ReserveTableDto reserveTableDto);
 }

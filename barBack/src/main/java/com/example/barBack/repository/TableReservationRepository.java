@@ -23,4 +23,20 @@ public interface TableReservationRepository
     List<TableReservationId> findReservedTables(
             @Param("startDate") Timestamp startDate,
             @Param("endDate") Timestamp endDate);
+
+    /**
+     * Проверка, есть ли бронь на указанный столик на указанну дату
+     * @param tableId ид столика
+     * @param startDate дата начала брони
+     * @param endDate дата окончания брони
+     * @return количество броней
+     */
+    @Query("select count(r) from TableReservation r "
+            + "where r.id.tableId = :tableId "
+            + "and r.reservationBegin >= :startDate "
+            + "and r.reservationBegin <= :endDate")
+    int tableReservationCheck(
+            @Param("tableId") long tableId,
+            @Param("startDate") Timestamp startDate,
+            @Param("endDate") Timestamp endDate);
 }
