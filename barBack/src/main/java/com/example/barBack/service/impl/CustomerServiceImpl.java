@@ -1,7 +1,6 @@
 package com.example.barBack.service.impl;
 
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
 //        if (!Pattern.matches(regexPhoneCheck, phone)) {
 //            throw new IllegalArgumentException("Incorrect phone number");
 //        }
-        return CustomerConverter.convertFromEntitytoDto(
+        return CustomerConverter.convertFromEntityToDto(
                 customerRepository.findCustomerByPhone(phone));
     }
 
@@ -62,6 +61,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDto getUserById(Long id) {
         final Customer customer = customerRepository.getCustomerById(id);
-        return CustomerConverter.convertFromEntitytoDto(customer);
+        return CustomerConverter.convertFromEntityToDto(customer);
     }
 }

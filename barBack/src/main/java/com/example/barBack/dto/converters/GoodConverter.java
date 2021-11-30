@@ -14,7 +14,7 @@ public class GoodConverter {
         dto.setVolume(entity.getVolume());
         dto.setDescription(entity.getDescription());
         dto.setAlcoholType(entity.getAlcoholType().getName());
-
+        dto.setPhotoId(entity.getPhotoId());
         return dto;
     }
 }
