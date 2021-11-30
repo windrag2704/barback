@@ -3,7 +3,7 @@ package com.example.barBack.model;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "product")
+@Table (name = "good")
 public class Good {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

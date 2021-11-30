@@ -19,7 +19,7 @@ public class GoodsController {
     private final GsonBuilder gsonBuilder = new GsonBuilder();
     private final Gson gson = gsonBuilder.create();
 
-    @PostMapping(value = "/getGoodsByCategory",
+    @PostMapping(value = "/getByCategory",
             consumes = "application/json",
             produces = "application/json")
     public String getGoodsByCategory(@RequestBody String body) {
@@ -28,13 +28,13 @@ public class GoodsController {
         return gson.toJson(goods);
     }
 
-    @GetMapping(value = "/getGoods", produces = "application/json")
+    @GetMapping(value = "/getAll", produces = "application/json")
     public String getGoods() {
         List<GoodDto> goods = service.getGoods();
         return gson.toJson(goods);
     }
 
-    @GetMapping(value = "/getGoodsByName", produces = "application/json")
+    @GetMapping(value = "/getByName", produces = "application/json")
     public String getGoodsByName(@RequestParam("name") String name) {
         List<GoodDto> goods = service.getGoodsByName(name);
         return gson.toJson(goods);
