@@ -1,3 +1,17 @@
+create table if not exists photo
+(
+    id   serial
+        constraint photo_pk
+            primary key,
+    name varchar(255) unique not null,
+    data bytea               not null
+);
+
+comment on table photo is 'Таблица для хранения фотографий';
+comment on column photo.id is 'Id фотографии';
+comment on column photo.name is 'Имя фотографии';
+comment on column photo.data is 'Фотография в байтах';
+
 create table if not exists bar_table
 (
     id       serial
@@ -82,19 +96,7 @@ create table if not exists alcohol_type
 comment on table alcohol_type is 'Таблица типов алкоголя (пиво, сидр и т.д.)';
 comment on column alcohol_type.id is 'Уникальный идентификатор типа алкоголя';
 comment on column alcohol_type.name is 'Название типа алкоголя';
-create table if not exists photo
-(
-    id   serial
-        constraint photo_pk
-            primary key,
-    name varchar(255) unique not null,
-    data bytea               not null
-);
 
-comment on table photo is 'Таблица для хранения фотографий';
-comment on column photo.id is 'Id фотографии';
-comment on column photo.name is 'Имя фотографии';
-comment on column photo.data is 'Фотография в байтах';
 create table if not exists good
 (
     id          serial
@@ -149,7 +151,7 @@ create table if not exists alco_reservation
             primary key,
     good_id     integer               not null
         constraint alco_reservation_good_id_fk
-            references product,
+            references good,
     customer_id integer               not null
         constraint alco_reservation_customer_id_fk
             references customer,
@@ -165,3 +167,15 @@ comment on column alco_reservation.customer_id is 'Ид клиента';
 comment on column alco_reservation.start_time is 'Дата и время брони';
 comment on column alco_reservation.count is 'кол-во товара';
 comment on column alco_reservation.finished is 'Алкоголь забрали, бронь закончена';
+
+create table if not exists customer_has_favourite
+(
+    customer_id integer
+        constraint favourite_customer_id_fk
+            references customer,
+    good_id integer
+        constraint favourite_good_id_fk
+            references good,
+    constraint favourite_pk
+        primary key (customer_id, good_id)
+);
