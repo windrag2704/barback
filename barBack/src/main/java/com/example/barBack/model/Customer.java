@@ -30,7 +30,7 @@ public class Customer {
     @JoinTable(
             name = "customer_has_favourite",
             joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
+            inverseJoinColumns = @JoinColumn(name = "good_id")
     )
     private Set<Good> favourites;
 

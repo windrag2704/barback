@@ -46,4 +46,6 @@ public interface GoodsRepository extends JpaRepository<Good, Long> {
     );
 
     // методы для поиска без категории и без имени и без категории
+
+    Good getGoodById(Long id);
 }
