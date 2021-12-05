@@ -28,6 +28,15 @@ public class Good {
     @JoinColumn (name="type_id")
     private AlcoholType alcoholType;
 
+    @Column(name = "code")
+    private int code;
+
+    @Column(name = "container")
+    private String container;
+
+    @Column(name = "num_of_bottles")
+    private int numOfBottles;
+
     public Long getId() {
         return id;
     }
@@ -82,5 +91,29 @@ public class Good {
 
     public void setAlcoholType(AlcoholType alcoholType) {
         this.alcoholType = alcoholType;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getContainer() {
+        return container;
+    }
+
+    public void setContainer(String container) {
+        this.container = container;
+    }
+
+    public int getNumOfBottles() {
+        return numOfBottles;
+    }
+
+    public void setNumOfBottles(int numOfBottles) {
+        this.numOfBottles = numOfBottles;
     }
 }

@@ -39,4 +39,13 @@ public class GoodsController {
         List<GoodDto> goods = service.getGoodsByName(name);
         return gson.toJson(goods);
     }
+
+    @PostMapping(value = "/save",
+            consumes = "application/json",
+            produces = "application/json")
+    public String saveGood(@RequestBody String body) {
+        GoodDto goodDto = gson.fromJson(body, GoodDto.class);
+        GoodDto goodDto1 = service.saveGood(goodDto);
+        return gson.toJson(goodDto1);
+    }
 }

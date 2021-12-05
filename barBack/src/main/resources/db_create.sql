@@ -113,7 +113,9 @@ create table if not exists good
         constraint good_alcohol_type_id_fk
             references alcohol_type,
     description varchar(255),
-    code        integer          not null
+    code        integer          not null,
+    container varchar(255) not null,
+    num_of_bottles integer
 );
 
 comment on table good is 'Таблица ассортимента алкоголя бара';
@@ -125,6 +127,8 @@ comment on column good.volume is 'Объем напитка';
 comment on column good.type_id is 'Ид типа алкоголя';
 comment on column good.description is 'Описание напитка';
 comment on column good.code is 'Штрих код';
+comment on column good.container is 'Тара: банка (бутылка) или разливное';
+comment on column good.num_of_bottles is 'Количество бутылок на складе, для разловного может быть null';
 
 create unique index if not exists product_code_uindex
     on good (code);
