@@ -18,8 +18,8 @@ public class BarTable {
     @Column(name = "location")
     private String location;
 
-    @Column(name = "photo")
-    private String photo;
+    @Column(name = "photo_id")
+    private Long photoId;
 
     public Long getId() {
         return id;
@@ -53,11 +53,11 @@ public class BarTable {
         this.location = location;
     }
 
-    public String getPhoto() {
-        return photo;
+    public Long getPhotoId() {
+        return photoId;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPhotoId(Long photoId) {
+        this.photoId = photoId;
     }
 }

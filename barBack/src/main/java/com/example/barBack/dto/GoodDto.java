@@ -8,6 +8,8 @@ public class GoodDto {
     private double volume;
     private String description;
     private String alcoholType;
+    private Long photoId;
+
 
     public Long getId() {
         return id;
@@ -63,5 +65,13 @@ public class GoodDto {
 
     public void setAlcoholType(String alcoholType) {
         this.alcoholType = alcoholType;
+    }
+
+    public Long getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(Long photoId) {
+        this.photoId = photoId;
     }
 }

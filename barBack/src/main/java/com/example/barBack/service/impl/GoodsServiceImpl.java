@@ -78,4 +78,9 @@ public class GoodsServiceImpl implements GoodsService {
                 .map(GoodConverter::convertFromEntityToDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public GoodDto getGoodById(Long id) {
+        return GoodConverter.convertFromEntityToDto(repository.getGoodById(id));
+    }
 }
