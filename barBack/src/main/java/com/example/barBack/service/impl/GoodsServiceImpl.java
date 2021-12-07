@@ -100,8 +100,7 @@ public class GoodsServiceImpl implements GoodsService {
             return GoodConverter.convertFromEntityToDto(savedGood);
         } else {
             Good newGood = GoodConverter.convertFromDtoToEntity(goodDto);
-            // почему то не ищет по имени((
-            final AlcoholType alcoholType = alcoholTypeRepository.findByName(goodDto.getName());
+            final AlcoholType alcoholType = alcoholTypeRepository.findByName(goodDto.getAlcoholType());
             newGood.setAlcoholType(alcoholType);
             final Good savedGood = repository.save(newGood);
             return GoodConverter.convertFromEntityToDto(savedGood);
