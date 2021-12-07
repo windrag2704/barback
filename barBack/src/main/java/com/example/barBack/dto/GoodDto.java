@@ -8,6 +8,9 @@ public class GoodDto {
     private double volume;
     private String description;
     private String alcoholType;
+    private int code;
+    private String container;
+    private int numOfBottles;
     private Long photoId;
 
 
@@ -65,6 +68,30 @@ public class GoodDto {
 
     public void setAlcoholType(String alcoholType) {
         this.alcoholType = alcoholType;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getContainer() {
+        return container;
+    }
+
+    public void setContainer(String container) {
+        this.container = container;
+    }
+
+    public int getNumOfBottles() {
+        return numOfBottles;
+    }
+
+    public void setNumOfBottles(int numOfBottles) {
+        this.numOfBottles = numOfBottles;
     }
 
     public Long getPhotoId() {

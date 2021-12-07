@@ -3,7 +3,10 @@ package com.example.barBack.service.impl;
 import com.example.barBack.dto.GoodDto;
 import com.example.barBack.dto.GoodFilterDto;
 import com.example.barBack.dto.converters.GoodConverter;
+import com.example.barBack.model.AlcoholType;
+import com.example.barBack.model.Containers;
 import com.example.barBack.model.Good;
+import com.example.barBack.repository.AlcoholTypeRepository;
 import com.example.barBack.repository.GoodsRepository;
 import com.example.barBack.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,9 @@ import java.util.stream.Collectors;
 public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private GoodsRepository repository;
+
+    @Autowired
+    private AlcoholTypeRepository alcoholTypeRepository;
 
     @Override
     public List<GoodDto> getGoodsByCategory(GoodFilterDto goodFilterDto) {
@@ -77,6 +83,28 @@ public class GoodsServiceImpl implements GoodsService {
         return goods.stream()
                 .map(GoodConverter::convertFromEntityToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public GoodDto saveGood(GoodDto goodDto) {
+        Good good = repository.findByCode(goodDto.getCode());
+        if (good != null) {
+            if (Containers.DRAFT.getName().equals(goodDto.getContainer())) {
+                good.setVolume(good.getVolume() + goodDto.getVolume());
+            } else if (Containers.BOTTLE.getName().equals(goodDto.getContainer())) {
+                good.setNumOfBottles(good.getNumOfBottles() + goodDto.getNumOfBottles());
+            } else {
+                throw new IllegalArgumentException("Указанной тары не существует!");
+            }
+            final Good savedGood = repository.save(good);
+            return GoodConverter.convertFromEntityToDto(savedGood);
+        } else {
+            Good newGood = GoodConverter.convertFromDtoToEntity(goodDto);
+            final AlcoholType alcoholType = alcoholTypeRepository.findByName(goodDto.getAlcoholType());
+            newGood.setAlcoholType(alcoholType);
+            final Good savedGood = repository.save(newGood);
+            return GoodConverter.convertFromEntityToDto(savedGood);
+        }
     }
 
     @Override
