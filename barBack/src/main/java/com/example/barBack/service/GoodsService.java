@@ -14,4 +14,6 @@ public interface GoodsService {
     List<GoodDto> getGoodsByName(String name);
 
     GoodDto saveGood(GoodDto goodDto);
+
+    GoodDto getGoodById(Long id);
 }

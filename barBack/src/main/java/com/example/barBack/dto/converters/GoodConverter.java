@@ -18,6 +18,7 @@ public class GoodConverter {
         dto.setContainer(entity.getContainer());
         dto.setNumOfBottles(entity.getNumOfBottles());
 
+        dto.setPhotoId(entity.getPhotoId());
         return dto;
     }
 

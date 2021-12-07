@@ -106,4 +106,9 @@ public class GoodsServiceImpl implements GoodsService {
             return GoodConverter.convertFromEntityToDto(savedGood);
         }
     }
+
+    @Override
+    public GoodDto getGoodById(Long id) {
+        return GoodConverter.convertFromEntityToDto(repository.getGoodById(id));
+    }
 }

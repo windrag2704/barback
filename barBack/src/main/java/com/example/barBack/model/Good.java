@@ -3,7 +3,7 @@ package com.example.barBack.model;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "good")
+@Table(name = "good")
 public class Good {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,9 +24,12 @@ public class Good {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne (fetch=FetchType.LAZY, optional = false)
-    @JoinColumn (name="type_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "type_id")
     private AlcoholType alcoholType;
+
+    @Column(name = "photo_id")
+    private Long photoId;
 
     @Column(name = "code")
     private int code;
@@ -115,5 +118,13 @@ public class Good {
 
     public void setNumOfBottles(int numOfBottles) {
         this.numOfBottles = numOfBottles;
+    }
+
+    public Long getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(Long photoId) {
+        this.photoId = photoId;
     }
 }

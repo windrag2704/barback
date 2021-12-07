@@ -11,6 +11,8 @@ public class GoodDto {
     private int code;
     private String container;
     private int numOfBottles;
+    private Long photoId;
+
 
     public Long getId() {
         return id;
@@ -90,5 +92,13 @@ public class GoodDto {
 
     public void setNumOfBottles(int numOfBottles) {
         this.numOfBottles = numOfBottles;
+    }
+
+    public Long getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(Long photoId) {
+        this.photoId = photoId;
     }
 }
